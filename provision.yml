@@ -76,3 +76,9 @@
     skip_swarm: True
   roles:
     - { role: atosatto.docker-swarm }
+  tasks:
+    - name: install docker-compose if neccessary
+      pip:
+        name: docker-compose
+        version: 1.8.0
+        state: present
