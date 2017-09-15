@@ -9,6 +9,22 @@
       register: cmd_apt_install_python
       changed_when: "cmd_apt_install_python.stdout != ''"
 
+- name: Modify resolv.conf
+  hosts: all
+  become: yes
+  tags:
+    - resolv
+  handlers:
+    - name: update resolvconf
+      command: resolvconf -u
+  tasks:
+    - name: copy resolv entry to /etc/resolvconf/resolv.conf.d/head
+      copy:
+        src: files/resolv.conf
+        dest: /etc/resolvconf/resolv.conf.d/head
+      notify:
+        - update resolvconf
+
 - name: Install Pip
   hosts: all
   become: yes
