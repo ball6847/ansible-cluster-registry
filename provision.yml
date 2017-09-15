@@ -1,0 +1,17 @@
+- name: Install Python
+  hosts: all
+  gather_facts: no
+  become: yes
+  tasks:
+  - raw: test -e /usr/bin/python || (apt install -y python-minimal)
+    register: cmd_apt_install_python
+    changed_when: "cmd_apt_install_python.stdout != ''"
+
+- name: Install Docker
+  hosts: docker
+  become: yes
+  vars:
+    skip_group: True
+    skip_swarm: True
+  roles:
+    - { role: atosatto.docker-swarm }

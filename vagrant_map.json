@@ -1,0 +1,12 @@
+{
+  "docker": {
+    "children": [
+      "docker_registry"
+    ]
+  },
+  "docker_registry": {
+    "hosts": [
+      "registry1"
+    ]
+  }
+}
