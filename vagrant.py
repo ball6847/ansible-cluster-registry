@@ -162,11 +162,25 @@ def get_role(host_dict):
 def get_groups(host_dicts):
     """ Return a dictionary of groups, with keys being group names and values
     being lists of hostnames in that group """
+
+    groups = {
+        "all": []
+    }
+
+    # default group "all"
+    for host_dict in host_dicts:
+        hostname = host_dict["Host"]
+        groups["all"].append(hostname)
+
+    # read additional group mapping from vagrant_map.json if any
     try:
         map_file = open('vagrant_map.json')
+        vagrant_map = json.load(map_file)
+        groups.update(vagrant_map)
     except IOError:
-        return {}
-    return json.load(map_file)
+        pass
+
+    return groups
 
 def generic_hostvars(host_dict):
     """ Return a dictionary of generic host variables to be listed under this
@@ -176,8 +190,8 @@ def generic_hostvars(host_dict):
         "ansible_ssh_port": host_dict["Port"],
         "ansible_ssh_host": host_dict["HostName"]
     }
-    if "IdentityFile" in hostvars_dict:
-        hostvars_dict["ansible_ssh_private_key_file"] = hostvars_dict["IdentityFile"]
+    if "IdentityFile" in host_dict:
+        hostvars_dict["ansible_ssh_private_key_file"] = host_dict["IdentityFile"]
     return hostvars_dict
 
 def mantl_hostvars(host_dict):
