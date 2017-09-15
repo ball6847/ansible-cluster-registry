@@ -1,2 +1,5 @@
 # all vars in this file will apply to all hosts
-foo: bar
+pip_install_packages:
+  - { name: apt-select, version: 2.0.0 }
+
+docker_dependencies:
