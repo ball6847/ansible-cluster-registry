@@ -40,6 +40,12 @@
     - apt-select
   vars:
     apt_select_freeze_period: 1440
+  pre_tasks:
+    - name: install apt-select if neccessary
+      pip:
+        name: apt-select
+        version: 2.0.0
+        state: present
   tasks:
     - name: check if we need to perform apt-select
       shell: "find /etc/apt/sources.list -amin +{{ apt_select_freeze_period }}"
