@@ -1,11 +1,18 @@
-- include: python.yml
+- name: "Install python"
+  hosts: all
+  gather_facts: false
+  roles:
+    - { role: ball6847.role.python, tags: [python] }
 
 - hosts: all
-  gather_facts: yes
-  become: yes
+  gather_facts: false
+  become: false
+  vars:
+   # vars for geerlingguy.pip
+    pip_install_packages:
+      - { name: docker-compose, version: 1.8.0 }
   roles:
-    - { role: ball6847.role.resolvconf }
-    - { role: geerlingguy.pip }
-    - { role: ball6847.role.apt-select, apt_select_country: TH }
-
-# - include: provision.yml
+    - { role: ball6847.role.resolvconf, tags: [resolv]}
+    - { role: geerlingguy.pip, tags: [pip] }
+    - { role: ball6847.role.apt-select, apt_select_country: TH, tags: [apt-select] }
+    - { role: atosatto.docker-swarm, skip_group: true, skip_swarm: true, tags: [docker] }
