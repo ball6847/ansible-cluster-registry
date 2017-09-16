@@ -4,7 +4,8 @@
   gather_facts: yes
   become: yes
   roles:
-    - ball6847.role.resolvconf
-
+    - { role: ball6847.role.resolvconf }
+    - { role: geerlingguy.pip }
+    - { role: ball6847.role.apt-select, apt_select_country: TH }
 
 # - include: provision.yml

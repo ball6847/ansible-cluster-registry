@@ -4,3 +4,5 @@
   version: master
 - src: https://github.com/ball6847/ball6847.role.resolvconf.git
   version: master
+- src: https://github.com/ball6847/ball6847.role.apt-select.git
+  version: master
