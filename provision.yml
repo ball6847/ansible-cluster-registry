@@ -1,69 +1,10 @@
-- name: Install Python
-  hosts: all
-  gather_facts: no
-  become: yes
-  tags:
-    - python
-  tasks:
-    - raw: test -e /usr/bin/python || (apt install -y python-minimal)
-      register: cmd_apt_install_python
-      changed_when: "cmd_apt_install_python.stdout != ''"
 
-- name: Modify resolv.conf
-  hosts: all
-  become: yes
-  tags:
-    - resolv
-  handlers:
-    - name: update resolvconf
-      command: resolvconf -u
-  tasks:
-    - name: copy resolv entry to /etc/resolvconf/resolv.conf.d/head
-      copy:
-        src: files/resolv.conf
-        dest: /etc/resolvconf/resolv.conf.d/head
-      notify:
-        - update resolvconf
 
-- name: Install Pip
-  hosts: all
-  become: yes
-  tags:
-    - pip
-  roles:
-    - { role: geerlingguy.pip }
 
-- name: Auto-Select Apt Mirror
-  hosts: all
-  become: yes
-  tags:
-    - apt-select
-  vars:
-    apt_select_freeze_period: 1440
-  pre_tasks:
-    - name: install apt-select if neccessary
-      pip:
-        name: apt-select
-        version: 2.0.0
-        state: present
-  tasks:
-    - name: check if we need to perform apt-select
-      shell: "find /etc/apt/sources.list -amin +{{ apt_select_freeze_period }}"
-      register: sources_list_find
-      changed_when: False
-    - name: perform apt-select
-      shell: "echo 'yes' | apt-select --country TH --top-number 3"
-      args:
-        chdir: /etc/apt/
-      when: "sources_list_find.stdout != ''"
-      register: apt_select_cmd
-      changed_when: "'New config file saved to' in apt_select_cmd.stdout"
-    - name: touch /etc/apt/sources.list if not changed
-      file:
-        path: /etc/apt/sources.list
-        state: touch
-      when: "apt_select_cmd.skipped == False
-        and apt_select_cmd.changed == False"
+
+
+
+
 
       
 - name: Install Docker
