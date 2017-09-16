@@ -1,1 +1,10 @@
-- include: provision.yml
+- include: python.yml
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  roles:
+    - ball6847.role.resolvconf
+
+
+# - include: provision.yml
