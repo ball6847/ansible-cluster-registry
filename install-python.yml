@@ -1,18 +1,5 @@
-- name: Install Python
+- name: "Install python"
   hosts: all
-  gather_facts: no
-  become: yes
-  tags:
-    - python
-  tasks:
-    - raw: test -e /usr/bin/python || (apt install -y python-minimal)
-      register: cmd_apt_install_python
-      changed_when: "cmd_apt_install_python.stdout != ''"
-
-- name: Install Pip
-  hosts: all
-  become: yes
-  tags:
-    - pip
+  gather_facts: False
   roles:
-    - { role: geerlingguy.pip }
+    - ball6847.python

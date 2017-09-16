@@ -1,4 +1,4 @@
 # all vars in this file will apply to all hosts
 
 # let's skip linux-kernel-virt for now
-docker_dependencies:
+docker_dependencies: []
