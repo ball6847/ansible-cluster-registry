@@ -1,2 +1,4 @@
 - src: atosatto.docker-swarm
 - src: geerlingguy.pip
+- src: https://github.com/ball6847/ball6847.role.python.git
+  version: master
