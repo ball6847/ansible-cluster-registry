@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  {{ docker_registry_container }}:
+  register:
     image: registry:2
-    container_name: {{ docker_registry_container }}
+    container_name: register
     restart: unless-stopped
     ports:
       - "{{ docker_registry_port }}:5000"
