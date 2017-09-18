@@ -32,6 +32,4 @@
         "Creating registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
         "Recreating registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
         "Starting registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout
-    - debug:
-        var: docker_compose_up
       
