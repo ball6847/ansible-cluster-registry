@@ -9,6 +9,7 @@
 .virtualenv
 .venv
 .vagrant
+.fuse_hidden*
 
 # ansible roles, generally grab it from ansible-gallaxy.
 # you might need to add exception here if you have roles developed locally.
