@@ -1,23 +1,4 @@
-- name: "Install Python"
-  hosts: all
-  gather_facts: false
-  roles:
-    - { role: ball6847.role.python, tags: [ python] }
-
-- name: Provisioning Server
-  hosts: all
-  gather_facts: true
-  become: true
-  vars:
-    pip_install_packages:
-      - name: docker-compose
-        version: 1.16.1
-    apt_select_country: TH
-    skip_group: true
-    skip_swarm: true
-    skip_docker_py: true
-  roles:
-    - { role: ball6847.role.resolvconf, tags: [ resolv ] }
-    - { role: geerlingguy.pip, tags: [ pip ] }
-    - { role: ball6847.role.apt-select, tags: [ apt-select ] }
-    - { role: atosatto.docker-swarm, tags: [ docker ] }
+- include: python.yml
+- include: provision.yml
+- include: apt_cacher.yml
+- include: registry.yml
