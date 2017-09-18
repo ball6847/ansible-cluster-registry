@@ -8,3 +8,5 @@
   version: master
 - src: https://github.com/ball6847/ball6847.role.docker-registry.git
   version: master
+- src: https://github.com/ball6847/ball6847.role.apt-cacher.git
+  version: master
