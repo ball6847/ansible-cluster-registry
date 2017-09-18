@@ -3,4 +3,4 @@
   become: yes
   tags: [ apt_cacher ]
   roles:
-    - { role: ball6847.role.apt_cacher }
+    - { role: ball6847.role.apt-cacher }
