@@ -7,7 +7,7 @@
     apt_cacher_volume: /var/cache/apt-cacher
     apt_cacher_port: 3142
   tasks:
-    - name: Create registry data path
+    - name: Create apt_cacher data path
       file:
         path: "{{ apt_cacher_path }}"
         state: directory
