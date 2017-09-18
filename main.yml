@@ -1,18 +1,24 @@
-- name: "Install python"
+- name: "Install Python"
   hosts: all
   gather_facts: false
   roles:
-    - { role: ball6847.role.python, tags: [python] }
+    - { role: ball6847.role.python, tags: [ python] }
 
-- hosts: all
-  gather_facts: false
-  become: false
+- name: Provisioning Server
+  hosts: all
+  gather_facts: true
+  become: true
   vars:
-   # vars for geerlingguy.pip
+    # TODO: test if we can really just install this version without uninstalling docker-py
     pip_install_packages:
-      - { name: docker-compose, version: 1.8.0 }
+      - name: docker-compose
+        version: 1.16.1
+    apt_select_country: TH
+    skip_group: true
+    skip_swarm: true
+    skip_docker_py: true
   roles:
-    - { role: ball6847.role.resolvconf, tags: [resolv]}
-    - { role: geerlingguy.pip, tags: [pip] }
-    - { role: ball6847.role.apt-select, apt_select_country: TH, tags: [apt-select] }
-    - { role: atosatto.docker-swarm, skip_group: true, skip_swarm: true, tags: [docker] }
+    - { role: ball6847.role.resolvconf, tags: [ resolv ] }
+    - { role: geerlingguy.pip, tags: [ pip ] }
+    - { role: ball6847.role.apt-select, tags: [ apt-select ] }
+    - { role: atosatto.docker-swarm, tags: [ docker ] }
