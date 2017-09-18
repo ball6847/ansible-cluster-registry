@@ -5,7 +5,6 @@
   vars:
     docker_registry_path: /opt/docker/registry
     docker_registry_volume: /var/lib/registry
-    docker_registry_container: registry
     docker_registry_port: 5000
   tasks:
     - name: Create registry data path
@@ -31,7 +30,7 @@
         chdir: "{{ docker_registry_path }}"
       register: docker_compose_up
       changed_when: |
-        "Creating {{ docker_registry_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
-        "Recreating {{ docker_registry_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
-        "Starting {{ docker_registry_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout
+        "Creating registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
+        "Recreating registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
+        "Starting registry ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout
       

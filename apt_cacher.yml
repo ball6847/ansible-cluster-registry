@@ -5,7 +5,6 @@
   vars:
     apt_cacher_path: /opt/docker/apt-cacher
     apt_cacher_volume: /var/cache/apt-cacher
-    apt_cacher_container: apt_cacher
     apt_cacher_port: 3142
   tasks:
     - name: Create registry data path
@@ -26,7 +25,7 @@
         chdir: "{{ apt_cacher_path }}"
       register: docker_compose_up
       changed_when: |
-        "Creating {{ apt_cacher_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
-        "Recreating {{ apt_cacher_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
-        "Starting {{ apt_cacher_container }} ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout
+        "Creating apt_cacher ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
+        "Recreating apt_cacher ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout or
+        "Starting apt_cacher ... \u001b[32mdone\u001b[0m" in docker_compose_up.stdout
       
