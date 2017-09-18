@@ -1,10 +1,10 @@
 {
-  "docker": {
-    "children": [
-      "docker_registry"
+  "docker_registry": {
+    "hosts": [
+      "registry1"
     ]
   },
-  "docker_registry": {
+  "apt_cacher": {
     "hosts": [
       "registry1"
     ]
