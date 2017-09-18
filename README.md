@@ -1,10 +1,3 @@
-Quickly create new project skeleton using this command.
-
-```bash
-mkdir project && cd project
-wget -qO- https://github.com/ball6847/ansible-skeleton/archive/master.tar.gz | tar -zx --strip-components=1
-```
-
 ## Usage
 
 ```sh
@@ -30,4 +23,10 @@ vagrant up
 
 # start your play
 ansible-playbook main.yml
+```
+
+On the the first run you might need to run with this command to force apt-select.
+
+```
+ansible-playbook main.yml -e apt_select_ignore_period=0
 ```
