@@ -3,4 +3,5 @@
   become: yes
   tags: [ registry ]
   roles:
-    - { role: ball6847.role.docker-registry }
+    - { role: ball6847.role.docker-registry, docker_registry_role: registry, docker_registry_port: 5000 }
+    - { role: ball6847.role.docker-registry, docker_registry_role: proxy, docker_registry_port: 5001 }
